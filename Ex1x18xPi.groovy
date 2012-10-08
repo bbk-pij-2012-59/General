@@ -10,7 +10,7 @@ while (y<=termnum)
  	{
   		sum=sum+(4/x)
  	}
- 	else if (y % 2 = 0)
+ 	else if (y % 2 == 0)
  	{
   		sum=sum-(4/x)
  	}
