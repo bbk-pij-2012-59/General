@@ -1,6 +1,6 @@
 boolean suit1acceptable = false, suit2acceptable = false, suit3acceptable = false, suit4acceptable = false, suit5acceptable = false
 boolean rank1acceptable = false, rank2acceptable = false, rank3acceptable = false, rank4acceptable = false, rank5acceptable = false
-boolean samesuit=false, foursuit=false, cardsconsecutive=false, fourrank=false, threerank=false, pair=false, twopair=false
+boolean samesuit=false, foursuit=false, cardsconsecutive=true, fourrank=false, threerank=false, pair=false, twopair=false, royalstraight=false
 int clubscount=0, diamondscount=0, heartscount=0, spadescount=0, acecount=0, twocount=0, threecount=0, fourcount=0, fivecount=0
 int sixcount=0, sevencount=0, eightcount=0, ninecount=0, tencount=0, jackcount=0, queencount=0, kingcount=0
 int temp1=0, temp2=0, temp3=0, temp4=0, temp5=0, value1=0, value2=0, value3=0, value4=0, value5=0
@@ -102,14 +102,14 @@ while (!rank1acceptable)
   		sevencount=sevencount+1
   		rank1acceptable = true
  	}
- 	else if (rank1 == "8" || rank1 == "EI" || rank1 == "Ei" || rank1 == "eI" || rank1 == "ei")
+ 	else if (rank1 == "8" || rank1 == "E" || rank1 == "e" || rank1 == "EI" || rank1 == "Ei" || rank1 == "eI" || rank1 == "ei")
  	{
   		value1=8
   		card1="Eight"
   		eightcount=eightcount+1
   		rank1acceptable = true
  	}
- 	else if (rank1 == "9" || rank1 == "NI" || rank1 == "Ni" || rank1 == "nI" || rank1 == "ni")
+ 	else if (rank1 == "9" || rank1 == "N" || rank1 == "n" || rank1 == "NI" || rank1 == "Ni" || rank1 == "nI" || rank1 == "ni")
  	{
   		value1=9
   		card1="Nine"
@@ -286,7 +286,7 @@ println "Your second card is the " + card2 + " of " + suit2
  
 while (!suit3acceptable)
 {
- 	print "What is the suit of your second card? "
+ 	print "What is the suit of your third card? "
  	s3 = System.console().readLine()
  	if (s3.substring(0,1) == "c" || s3.substring(0,1) == "C")
  	{
@@ -423,7 +423,7 @@ println "Your third card is the " + card3 + " of " + suit3
 
 while (!suit4acceptable)
 {
- 	print "What is the suit of your second card? "
+ 	print "What is the suit of your fourth card? "
  	s4 = System.console().readLine()
  	if (s4.substring(0,1) == "c" || s4.substring(0,1) == "C")
  	{
@@ -452,7 +452,7 @@ while (!suit4acceptable)
 }
 while (!rank4acceptable)
 {
- 	print "what is the rank of your third card? "
+ 	print "what is the rank of your fourth card? "
  	r4 = System.console().readLine()
  	lenrank4 = r4.length()
  	if (lenrank4 == 1)
@@ -559,7 +559,7 @@ println "Your fourth card is the " + card4 + " of " + suit4
 
 while (!suit5acceptable)
 {
- 	print "What is the suit of your second card? "
+ 	print "What is the suit of your fifth card? "
  	s5 = System.console().readLine()
  	if (s5.substring(0,1) == "c" || s5.substring(0,1) == "C")
  	{
@@ -699,11 +699,6 @@ temp2=value2
 temp3=value3
 temp4=value4
 temp5=value5
-println temp1
-println temp2
-println temp3
-println temp4
-println temp5
 sortrank1=temp1
 x1=1
 if (temp2<sortrank1)
@@ -747,8 +742,7 @@ else if (x1==5)
 {
 	temp5=20
 }
-print sortrank1+"  "
-println x1
+
 sortrank2=temp1
 x2=1
 if (temp2<sortrank2)
@@ -792,8 +786,6 @@ else if (x2==5)
 {
 	temp5=20
 }
-print sortrank2+"  "
-println x2
  
 sortrank3=temp1
 x3=1
@@ -838,8 +830,6 @@ else if (x3==5)
 {
 	temp5=20
 }
-print sortrank3+"  "
-println x3
  
 sortrank4=temp1
 x4=1
@@ -884,8 +874,6 @@ else if (x4==5)
 {
 	temp5=20
 }
-print sortrank4+"  "
-println x4
  
 sortrank5=temp1
 x5=1
@@ -910,42 +898,139 @@ if (temp5<sortrank5)
  	x5=5
 }
  
-if (x5==1)
-{
-	temp1=20 //any number larger than 13 would do
-}
-else if (x5==2)
-{
-	temp2=20
-}
-else if (x5==3)
-{
-	temp3=20
-}
-else if (x5==4)
-{
-	temp4=20
-}
-else if (x5==5)
-{
-	temp5=20
-}
-print sortrank5+"  "
-println x5
+//if (x5==1)
+//{
+//	temp1=20 //any number larger than 13 would do
+//}
+//else if (x5==2)
+//{
+//	temp2=20
+//}
+//else if (x5==3)
+//{
+//	temp3=20
+//}
+//else if (x5==4)
+//{
+//	temp4=20
+//}
+//else if (x5==5)
+//{
+//	temp5=20
+//}
  
-// Check if the ranks are consecutive
- 
+// Check if the ranks are not consecutive
+if (sortrank2 != (sortrank1 + 1) || sortrank3 != (sortrank2 + 1) || sortrank4 != (sortrank3 + 1) || sortrank5 != (sortrank4 + 1))
+{
+	cardsconsecutive=false
+}
+//What about a royal straight though?!
+if (sortrank1 == 1)
+{
+	if ((sortrank1 + 13) == (sortrank5 + 1) && sortrank5 == (sortrank4 + 1) && sortrank4 == (sortrank3 + 1) && sortrank3 == (sortrank2 + 1))
+	{
+	cardsconsecutive=true
+	royalstraight=true
+	}
+}
+	
 //Decide if the hand meets any of the criteria
+
+//Are four or five of the cards from the same suit?
+if (clubscount==5 || diamondscount==5 || heartscount==5 || spadescount==5)
+{
+	samesuit=true
+}
+else if (clubscount==4 || diamondscount==4 || heartscount==4 || spadescount==4)
+{
+	foursuit=true
+}
  
+//Are four, three or two of the cards of the same rank?
+if (acecount==4 || twocount==4 || threecount==4 || fourcount==4 || fivecount==4 || sixcount==4 || sevencount==4 || eightcount==4 || ninecount==4 || tencount==4 || jackcount==4 || queencount==4 || kingcount==4)
+{
+	fourrank=true
+}
+else if (acecount==3 || twocount==3 || threecount==3 || fourcount==3 || fivecount==3 || sixcount==3 || sevencount==3 || eightcount==3 || ninecount==3 || tencount==3 || jackcount==3 || queencount==3 || kingcount==3)
+{
+	threerank=true
+}
+if (acecount==2 || twocount==2 || threecount==2 || fourcount==2 || fivecount==2 || sixcount==2 || sevencount==2 || eightcount==2 || ninecount==2 || tencount==2 || jackcount==2 || queencount==2 || kingcount==2)
+{
+	pair=true
+}
+
+//Is there more than one pair?
+if (pair && !threerank && !fourrank)
+{
+	if (acecount==2 && (twocount==2 || threecount==2 || fourcount==2 || fivecount==2 || sixcount==2 || sevencount==2 || eightcount==2 || ninecount==2 || tencount==2 || jackcount==2 || queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (twocount==2 && (threecount==2 || fourcount==2 || fivecount==2 || sixcount==2 || sevencount==2 || eightcount==2 || ninecount==2 || tencount==2 || jackcount==2 || queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (threecount==2 && (fourcount==2 || fivecount==2 || sixcount==2 || sevencount==2 || eightcount==2 || ninecount==2 || tencount==2 || jackcount==2 || queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (fourcount==2 && (fivecount==2 || sixcount==2 || sevencount==2 || eightcount==2 || ninecount==2 || tencount==2 || jackcount==2 || queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (fivecount==2 && (sixcount==2 || sevencount==2 || eightcount==2 || ninecount==2 || tencount==2 || jackcount==2 || queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (sixcount==2 && (sevencount==2 || eightcount==2 || ninecount==2 || tencount==2 || jackcount==2 || queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (sevencount==2 && (eightcount==2 || ninecount==2 || tencount==2 || jackcount==2 || queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (eightcount==2 && (ninecount==2 || tencount==2 || jackcount==2 || queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (ninecount==2 && (tencount==2 || jackcount==2 || queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (tencount==2 && (jackcount==2 || queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (jackcount==2 && (queencount==2 || kingcount==2))
+	{
+		twopair=true
+	}
+	if (queencount==2 && kingcount==2)
+	{
+		twopair=true
+	}
+}	
+
+//Print out the outcome
+
 if (samesuit && cardsconsecutive) 
 {
-	println "Your hand is a Straight Flush"//all cards share the same suit and their ranks are consecutive
+	if (royalstraight)
+	{
+		println "Your hand is a Ace-High Straight Flush"//all cards share the same suit and their ranks run consecutively from ten to ace
+	}
+	else
+	{
+		println "Your hand is a Straight Flush"//all cards share the same suit and their ranks are consecutive
+	}
 }
-else if (acecount==4 || twocount==4 || threecount==4 || fourcount==4 || fivecount==4 || sixcount==4 || sevencount==4 || eightcount==4 || ninecount==4 || tencount==4 || jackcount==4 || queencount==4 || kingcount==4)
+else if (fourrank)
 {
 	println "Your hand contains a Poker" //four of the five cards have the same rank
 }
-else if (threerank && onepair)
+else if (threerank && pair)
 {
 	println "Your hand is a Full House" //three of a kind plus a pair
 }
@@ -955,9 +1040,18 @@ else if (samesuit)
 }
 else if (cardsconsecutive)
 {
-	println "Your hand is a Straight" //the cards do not share the same suit, but all their ranks are consecutive
+	if (royalstraight)
+	{
+		println "Your hand is a Ace-High Straight"//the cards do not share the same suit, but their ranks run consecutively from ten to ace
+	}
+	else
+	{
+		println "Your hand is a Straight"//the cards do not share the same suit, but all their ranks are consecutive
+	}
 }
-else if (threerank)
+if (samesuit && cardsconsecutive) 
+{
+}else if (threerank)
 {
 	println "Your hand contains Three of a Kind" //three of the cards have the same rank
 }
@@ -973,4 +1067,4 @@ else
 {
 	println "Sorry your hand contains Nothing!"
 }
- 
+
