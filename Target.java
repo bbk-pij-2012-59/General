@@ -1,14 +1,14 @@
-//For Ex5x6 - in progress - init still to be written, { problem
+//For Ex5x6 - compiles
 
 public class Target
 {
 
-	private int [][][] airspace;
-	private int [] helicopter;
+	private int[][][] airspace;
+	private int[] helicopter = new int[3];
 
 	public Target(int x)
 	{
-	//constructor method that creates a 3-D array of integers of the proposed size in all three dimensions. All elements must be set to zero
+	//constructor method that creates a 3-D array of integers of the proposed size in all three dimensions and sets all elements to zero
 		airspace = new int [x][x][x];
 		for (int i = 0; i < x; i++)
 		{
@@ -24,51 +24,55 @@ public class Target
 
 	public void init()
 	{
-	//sets one element, selected randomly, to 1 and all the others to zero.  random integer between 0 and N  int numberToGuess = (int) Math.abs(N * Math.random())
-		int copterX = Math.abs((airspace.length-1) * Math.random());
-		int copterY = Math.abs((airspace.length-1) * Math.random());
-		int copterZ = Math.abs((airspace.length-1) * Math.random());
+	//sets one element, selected randomly, to 1, leaving the rest as zero
+		int copterX = (int) Math.abs((airspace.length-1) * Math.random());
+		int copterY = (int) Math.abs((airspace.length-1) * Math.random());
+		int copterZ = (int) Math.abs((airspace.length-1) * Math.random());
 		airspace[copterX][copterY][copterZ] = 1;
-		helicopter = [copterX, copterY, copterZ];//problem here
+		helicopter[0] = copterX;
+		helicopter[1] = copterY;
+		helicopter[2] = copterZ;
+		return;
 	}
 
-	public fire(int a,int b,int c)//need return type
+	//public Result fire(int a,int b,int c)
+	public int fire(int a,int b,int c)
 	{
-		if (airspace[a][b][c] == 1)
+	Result whathappened = Result.PROBLEM;
+		if (a > airspace.length || b > airspace[0].length || c > airspace[0][0].length || a < 0 || b < 0 || c < 0)
 		{
-			return Result.HIT;
+
+			whathappened = Result.OUT_OF_RANGE;
 		}
-		else if (a > airspace.length || b > airspace[0].length || c > airspace[0][0].length || a < 0 || b < 0 || c < 0)
+		else if (airspace[a][b][c] == 1)
 		{
-			return Result.OUT_OF_RANGE;
+			whathappened = Result.HIT;
 		}
-		else if (a < helicopter[1])
+		else if (a < helicopter[0])
 		{
-			return Result.FAIL_LEFT;
+			whathappened = Result.FAIL_LEFT;
 		}
-		else if (a > helicopter[1])
+		else if (a > helicopter[0])
 		{
-			return Result.FAIL_RIGHT;
+			whathappened = Result.FAIL_RIGHT;
 		}
-		else if (b < helicopter[2])
+		else if (b < helicopter[1])
 		{
-			return Result.FAIL_LOW;
+			whathappened = Result.FAIL_LOW;
 		}
-		else if (b > helicopter[2])
+		else if (b > helicopter[1])
 		{
-			return Result.FAIL_HIGH;
+			whathappened = Result.FAIL_HIGH;
 		}
-		else if (c > helicopter[3])
+		else if (c > helicopter[2])
 		{
-			return Result.FAIL_LONG;
+			whathappened = Result.FAIL_LONG;
 		}
-		else if (c < helicopter[3])
+		else if (c < helicopter[2])
 		{
-			return Result.FAIL_SHORT;
+			whathappened = Result.FAIL_SHORT;
 		}
-		else
-		{
-			return
-		}//illegal start of expression
+	return whathappened.ordinal()+1;
+	//return whathappened;
 	}
 }
