@@ -1,7 +1,7 @@
 public class Matrix
 {
 	//In progress
-int [][] matrixx;
+private int [][] matrixx;
 
 	public Matrix(int x, int y)
 	//constructor method setting the size of the array as two integers (not necessarily the same and initialising all elements in the array to 1
@@ -135,10 +135,103 @@ int [][] matrixx;
 		}
 	}
 
-	public void setMatrix(String loadsOfValues)
+	//public void setMatrix(String loadsOfValues)
+	public Matrix(String loadsOfValues)
 	//takes a String representing the numbers to be put in the elements of the array separated by commas, separating rows by semicolons (e.g. "1,2,3;4,5,6;7,8,9")
 	{
+		//find the semicolon in loadsOfValues
+		int possemi = 0;
+		for (int p = 1; p < loadsOfValues.length()-1; p++)
+		{
+			if ((loadsOfValues.charAt(p)) == ';')
+			{
+				possemi = p;
+			}
+		}
+		System.out.println(possemi);
 
+		String firstrow = loadsOfValues.substring(0,possemi);
+		System.out.println(firstrow);
+		String secondrow = loadsOfValues.substring((possemi + 1), loadsOfValues.length());
+		System.out.println(secondrow);
+
+		//count the number of commas in firstrow
+		int ncomma1 = 0;
+		for (int n = 1; n < firstrow.length()-1; n++)
+			{
+				if ((firstrow.charAt(n)) == ',')
+				{
+					ncomma1++;
+				}
+			}
+		System.out.println(ncomma1);
+		//count the number of commas in secondrow
+		int ncomma2 = 0;
+		for (int n = 1; n < secondrow.length()-1; n++)
+		{
+			if ((secondrow.charAt(n)) == ',')
+			{
+				ncomma2++;
+			}
+		}
+		System.out.println(ncomma2);
+		//check that both rows contain the same number of numbers
+		//hanging somewhere beyond here
+		if (ncomma1 != ncomma2)
+		{
+			System.out.println("Different number of columns in the two rows");
+		}
+		else
+		{
+			//if there are the same number of numbers, put them into the array
+			int i = 0;
+			int j = 0;
+			//for (int k = 0; k < firstrow.length(); k++)
+			while (i < ncomma1)
+			{
+				System.out.println("i: " + i + " j: " + j);
+				//while (i < ncomma1)
+				for (int k = 0; k < firstrow.length(); k++)
+				{
+					System.out.println("i: " + i + "j: " + j + "k: " + k);
+					if ((firstrow.charAt(k)) == ',')
+					{
+						System.out.println("i: " + i + "j: " + j + "k: " + k);
+						matrixx[0][i] = Integer.parseInt(firstrow.substring(j,k));
+						i++;
+						j = k + 1;
+						System.out.println("i: " + i + "j: " + j + "k: " + k);
+					}
+				}
+			}
+			matrixx[0][ncomma1] = Integer.parseInt(firstrow.substring(j,firstrow.length()-1));
+
+			int p = 0;
+			int q = 0;
+			for (int r = 0; r < secondrow.length(); r++)
+			{
+				while (p < ncomma2)
+				{
+					if ((secondrow.charAt(r)) == ',')
+					{
+						matrixx[1][p] = Integer.parseInt(secondrow.substring(q,r));
+						p++;
+						q = r + 1;
+						System.out.println("p: " + p + "q: " + q + "r: " + r);
+					}
+				}
+			}
+				matrixx[1][ncomma2] = Integer.parseInt(secondrow.substring(q,secondrow.length()-1));
+
+		}
+		for (int i = 0; i < ncomma1; i++)
+		{
+			System.out.println(matrixx[0][i] + ", ");
+		}
+		for (int i = 0; i < ncomma2; i++)
+		{
+			System.out.println(matrixx[1][i] + ", ");
+		}
 	}
 
 	public Boolean symmetryCheck()
