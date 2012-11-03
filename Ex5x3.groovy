@@ -68,7 +68,8 @@ while (!exitcmd)
 	case 0:
 		System.out.print("Please enter the new values for the matrix (as a list of integers separated by commas and semicolons): ");
 		newMatrix = System.console().readLine();
-		myMatrix.setMatrix(newMatrix);
+		//myMatrix.setMatrix(newMatrix);
+		Matrix myMatrix = new Matrix(newMatrix);		
 		break;
 	case 7:
 		myMatrix.symmetryCheck();
