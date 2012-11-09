@@ -6,7 +6,7 @@ public class MatrixChecker
 	{
 		for (int i = 0; i <= array1.length/2; i++)
 		{
-			if (array1[i] != array1[array1.length-i])
+			if (array1[i] != array1[array1.length-(i+1)])
 			{
 				return false;
 			}
@@ -16,13 +16,23 @@ public class MatrixChecker
 
 	public boolean isSymmetrical(int matrix1[][])
 	{
-		for (int i = 0; i < matrix1.length; i++)
+		//first check if same number of rows and columns
+		if (matrix1.length != matrix1[0].length)
 		{
-			for (int j = 0; j < matrix1[0].length; j++)
+			System.out.println("Number of rows and columns do not match");
+			return false;
+		}
+		else
+		{
+		//check if elements match
+		for (int i = 0; i < matrix1.length; i++)
 			{
-				if (matrix1[i][j] != matrix1[j][i])
+				for (int j = 0; j < matrix1[0].length; j++)
 				{
-					return false;
+					if (matrix1[i][j] != matrix1[j][i])
+					{
+						return false;
+					}
 				}
 			}
 		}
@@ -31,16 +41,25 @@ public class MatrixChecker
 
 	public boolean isTriangular(int matrix2[][])
 	{
-		for (int i = 0; i < matrix2.length; i++)
+		//first check if same number of rows and columns
+		if (matrix2.length != matrix2[0].length)
 		{
-			for (int j = 0; j < i; j++)
+			System.out.println("Number of rows and columns do not match");
+			return false;
+		}
+		else
+		{
+			for (int i = 0; i < matrix2.length; i++)
 			{
-				if (matrix2[i][j] != 0)
+				for (int j = 0; j < i; j++)
 				{
-					return false;
+					if (matrix2[i][j] != 0)
+					{
+						return false;
+					}
 				}
 			}
 		}
-		return true;
+	return true;
 	}
 }

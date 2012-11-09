@@ -27,56 +27,17 @@ private int [][] matrixx;
 		}
 	}
 
-	public void setRow(int y, String newXvalues)
+	public void setRow(int x, String newYvalues)
 	//modifies one whole row of the array, given its position as an integer and the list of numbers as a String (e.g. “1,2,3”)
 	//must check that the index is valid and the numbers are correct (i.e. if the array has three columns, the String contains three numbers)
 	//if the index or the String is invalid, the method will do nothing
 	{
-		//Is there a row y?
-		if (y >= 0 && y <= (matrixx[0].length-1))
+		//Is there a row x?
+		if (x >= 0 && x < (matrixx.length))
 		{
-			//count the number of commas in newXvalues
+			//count the number of commas in newYvalues
 			int ncomma = 0;
-			for (int n = 1; n < newXvalues.length()-1; n++)
-			{
-				if ((newXvalues.charAt(n)) == ',')
-				{
-					ncomma++;
-				}
-			}
-			//if there are the correct number of values, put them into the array
-			if (matrixx.length == ncomma + 1)
-			{
-				int i = 0;
-				int j = 0;
-				for (int k = 0; k < newXvalues.length(); k++)
-				{
-					while (i < matrixx.length - 1)
-					{
-						if ((newXvalues.charAt(k)) == ',')
-						{
-							matrixx[i][y] = Integer.parseInt(newXvalues.substring(j,k));
-							i++;
-							j = k + 1;
-						}
-					}
-				}
-				matrixx[matrixx.length-1][y] = Integer.parseInt(newXvalues.substring(j,newXvalues.length()-1));
-			}
-		}
-	}
-
-	public void setColumn( int x, String newYvalues)
-	//modifies one whole column of the array, given its position as an integer and the list of numbers as a String (e.g. “1,2,3”)
-	//must check that the index is valid and the numbers are correct (i.e. if the array has four rows, the String contains four numbers)
-	//if the index or the String is invalid, the method will do nothing
-	{
-		//Is there a column x?
-		if (x >= 0 && x <= (matrixx.length-1))
-		{
-			//count the number of commas in newXvalues
-			int ncomma = 0;
-			for (int n = 1; n < newYvalues.length()-1; n++)
+			for (int n = 1; n < newYvalues.length(); n++)
 			{
 				if ((newYvalues.charAt(n)) == ',')
 				{
@@ -84,23 +45,70 @@ private int [][] matrixx;
 				}
 			}
 			//if there are the correct number of values, put them into the array
-			if (matrixx[0].length == ncomma + 1)
+			if (matrixx[x].length != ncomma + 1)
 			{
-				int i = 0;
-				int j = 0;
-				for (int k = 0; k < newYvalues.length(); k++)
+				System.out.println("Number of columns and number of new values do not match");
+			}
+			else
+			{
+				int i = 0, k = 0;
+				while (i < ncomma)
 				{
-					while (i < matrixx[0].length - 1)
+					if ((newYvalues.charAt(k)) == ',')
 					{
-						if ((newYvalues.charAt(k)) == ',')
-						{
-							matrixx[x][i] = Integer.parseInt(newYvalues.substring(j,k));
-							i++;
-							j = k + 1;
-						}
+						matrixx[x][i] = Integer.parseInt(newYvalues.substring(0,k));
+						newYvalues = newYvalues.substring(k + 1);
+						i++;
+					}
+					else
+					{
+						k++;
 					}
 				}
-				matrixx[x][matrixx[0].length-1] = Integer.parseInt(newYvalues.substring(j,newYvalues.length()-1));
+				matrixx[x][ncomma] = Integer.parseInt(newYvalues);
+			}
+		}
+	}
+
+	public void setColumn( int y, String newXvalues)
+	//modifies one whole column of the array, given its position as an integer and the list of numbers as a String (e.g. “1,2,3”)
+	//must check that the index is valid and the numbers are correct (i.e. if the array has four rows, the String contains four numbers)
+	//if the index or the String is invalid, the method will do nothing
+	{
+		//Is there a column y?
+		if (y >= 0 && y < (matrixx[0].length))
+		{
+			//count the number of commas in newXvalues
+			int ncomma = 0;
+			for (int n = 1; n < newXvalues.length(); n++)
+			{
+				if ((newXvalues.charAt(n)) == ',')
+				{
+					ncomma++;
+				}
+			}
+			//if there are the correct number of values, put them into the array
+			if (matrixx.length != ncomma + 1)
+			{
+				System.out.println("Number of rows and number of new values do not match");
+			}
+			else
+			{
+				int j = 0, k = 0;
+				while (j < ncomma)
+				{
+					if ((newXvalues.charAt(k)) == ',')
+					{
+						matrixx[j][y] = Integer.parseInt(newXvalues.substring(0,k));
+						newXvalues = newXvalues.substring(k + 1);
+						j++;
+					}
+					else
+					{
+					k++;
+					}
+				}
+				matrixx[ncomma][y] = Integer.parseInt(newXvalues);
 			}
 		}
 	}
@@ -112,12 +120,13 @@ private int [][] matrixx;
 		String arrayAsString = "[";
 		for (int i = 0; i < matrixx.length; i++)
 		{
-			for (int j = 0; j < matrixx[0].length; j++)
+			for (int j = 0; j < matrixx[0].length-1; j++)
 			{
-				arrayAsString = arrayAsString + matrixx[i][j];
+				arrayAsString = arrayAsString + matrixx[i][j] + ", ";
 			}
+			arrayAsString = arrayAsString + matrixx[i][matrixx[0].length-1] + "; ";
 		}
-		arrayAsString = arrayAsString + "]";
+		arrayAsString = arrayAsString.substring(0, arrayAsString.length()-2) + "]";
 		return arrayAsString;
 	}
 
@@ -139,99 +148,69 @@ private int [][] matrixx;
 	public Matrix(String loadsOfValues)
 	//takes a String representing the numbers to be put in the elements of the array separated by commas, separating rows by semicolons (e.g. "1,2,3;4,5,6;7,8,9")
 	{
-		//find the semicolon in loadsOfValues
+		//find the semicolons (i.e. the number of rows) in loadsOfValues
 		int possemi = 0;
 		for (int p = 1; p < loadsOfValues.length()-1; p++)
 		{
 			if ((loadsOfValues.charAt(p)) == ';')
 			{
-				possemi = p;
+				possemi++;
 			}
 		}
 		System.out.println(possemi);
-
-		String firstrow = loadsOfValues.substring(0,possemi);
-		System.out.println(firstrow);
-		String secondrow = loadsOfValues.substring((possemi + 1), loadsOfValues.length());
-		System.out.println(secondrow);
-
+		//Split out first row
+		String firstrow = "", nextrow = "", whatisleft = "";
+		int k = 0;
+		Boolean foundsemicolon = false;
+		while (!foundsemicolon)
+		{
+			if ((loadsOfValues.charAt(k)) == ';')
+			{
+				firstrow = loadsOfValues.substring(0,k);
+				whatisleft = loadsOfValues.substring(k + 1) + ";";
+				foundsemicolon = true;
+				System.out.println(loadsOfValues + firstrow + whatisleft);
+			}
+			else
+			{
+				k++;
+			}
+		}
 		//count the number of commas in firstrow
-		int ncomma1 = 0;
-		for (int n = 1; n < firstrow.length()-1; n++)
+		int ncomma = 0;
+		for (int n = 1; n < firstrow.length(); n++)
+		{
+			if ((firstrow.charAt(n)) == ',')
 			{
-				if ((firstrow.charAt(n)) == ',')
+				ncomma++;
+			}
+		}
+		//now we know how big an array to make
+		Matrix myMatrixx = new Matrix(possemi + 1, ncomma + 1);
+		//take the first row and replace with new data
+		myMatrixx.setRow((0),firstrow);
+		//repeat for the rest of the rows
+		for (int i = 1; i <=possemi; i++)
+		{
+		int j = 0;
+		foundsemicolon = false;
+		while (!foundsemicolon)
+			{
+				if ((whatisleft.charAt(j)) == ';')
 				{
-					ncomma1++;
+					nextrow = whatisleft.substring(0,j);
+					whatisleft = whatisleft.substring(j + 1);
+					myMatrixx.setRow((i),nextrow);
+					foundsemicolon = true;
+					System.out.println(nextrow + whatisleft);
+				}
+				else
+				{
+					j++;
 				}
 			}
-		System.out.println(ncomma1);
-		//count the number of commas in secondrow
-		int ncomma2 = 0;
-		for (int n = 1; n < secondrow.length()-1; n++)
-		{
-			if ((secondrow.charAt(n)) == ',')
-			{
-				ncomma2++;
-			}
 		}
-		System.out.println(ncomma2);
-		//check that both rows contain the same number of numbers
-		//hanging somewhere beyond here
-		if (ncomma1 != ncomma2)
-		{
-			System.out.println("Different number of columns in the two rows");
-		}
-		else
-		{
-			//if there are the same number of numbers, put them into the array
-			int i = 0;
-			int j = 0;
-			//for (int k = 0; k < firstrow.length(); k++)
-			while (i < ncomma1)
-			{
-				System.out.println("i: " + i + " j: " + j);
-				//while (i < ncomma1)
-				for (int k = 0; k < firstrow.length(); k++)
-				{
-					System.out.println("i: " + i + "j: " + j + "k: " + k);
-					if ((firstrow.charAt(k)) == ',')
-					{
-						System.out.println("i: " + i + "j: " + j + "k: " + k);
-						matrixx[0][i] = Integer.parseInt(firstrow.substring(j,k));
-						i++;
-						j = k + 1;
-						System.out.println("i: " + i + "j: " + j + "k: " + k);
-					}
-				}
-			}
-			matrixx[0][ncomma1] = Integer.parseInt(firstrow.substring(j,firstrow.length()-1));
-
-			int p = 0;
-			int q = 0;
-			for (int r = 0; r < secondrow.length(); r++)
-			{
-				while (p < ncomma2)
-				{
-					if ((secondrow.charAt(r)) == ',')
-					{
-						matrixx[1][p] = Integer.parseInt(secondrow.substring(q,r));
-						p++;
-						q = r + 1;
-						System.out.println("p: " + p + "q: " + q + "r: " + r);
-					}
-				}
-			}
-				matrixx[1][ncomma2] = Integer.parseInt(secondrow.substring(q,secondrow.length()-1));
-
-		}
-		for (int i = 0; i < ncomma1; i++)
-		{
-			System.out.println(matrixx[0][i] + ", ");
-		}
-		for (int i = 0; i < ncomma2; i++)
-		{
-			System.out.println(matrixx[1][i] + ", ");
-		}
+	myMatrixx.prettyPrint();
 	}
 
 	public Boolean symmetryCheck()

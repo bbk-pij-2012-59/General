@@ -1,8 +1,9 @@
 Ex5x3
-//Basic problem: couldn't see myMatrix after case 1 called, so had to construct it before switch; cases 2, 6 now working
-//5 doesn't add commas; 3, 4 and 9 have infinite loops
+//03/11/2012: Basic problem: couldn't see myMatrix after case 1 called, so had to construct it before switch; cases 2, 6 now working
+//05/11/2012: 5 now adds correct commas and semi-colons; 3, 4 and 9 still have infinite loops, 7 and (hopefully 8) working
+//08/11/2012: 3 and 4 now working; 9 works, but once you have run that option, you can't (re)run any of the other options
 String str="", newRow = "", newColumn = "", newMatrix = "";
-int switchNo = 9, x1 = 0, y1 = 0, x2 = 0, y2 = 0, newValue = 0, y3 = 0, x4 = 0;
+int switchNo = 0, x1 = 0, y1 = 0, x2 = 0, y2 = 0, newValue = 0, x3 = 0, y4 = 0;
 Boolean exitcmd = false;
 
 System.out.print("How many rows do you want in your array? ");
@@ -33,10 +34,10 @@ while (!exitcmd)
 	case 2:
 		System.out.print("In which column is the element to be modified? ");
 		str = System.console().readLine();
-		x2 = Integer.parseInt(str);
+		y2 = Integer.parseInt(str);
 		System.out.print("In which row is the element to be modified? ");
 		str = System.console().readLine();
-		y2 = Integer.parseInt(str);
+		x2 = Integer.parseInt(str);
 		System.out.print("Please enter the new value of the element: ");
 		str = System.console().readLine();
 		newValue = Integer.parseInt(str);
@@ -45,18 +46,18 @@ while (!exitcmd)
 	case 3:
 		System.out.print("Which row of the array is to be modified? ");
 		str = System.console().readLine();
-		y3 = Integer.parseInt(str);
+		x3 = Integer.parseInt(str);
 		System.out.print("Please enter the new values for the row (as a list of integers separated by commas): ");
 		newRow = System.console().readLine();
-		myMatrix.setRow(y3-1,newRow);
+		myMatrix.setRow((x3 - 1),newRow);
 		break;
 	case 4:
 		System.out.print("Which column of the array is to be modified? ");
 		str = System.console().readLine();
-		x4 = Integer.parseInt(str);
+		y4 = Integer.parseInt(str);
 		System.out.print("Please enter the new values for the column (as a list of integers separated by commas): ");
 		newColumn = System.console().readLine();
-		myMatrix.setRow(x4-1,newColumn);
+		myMatrix.setColumn((y4 - 1),newColumn);
 		break;
 	case 5:
 		System.out.println(myMatrix.toString());
@@ -72,10 +73,25 @@ while (!exitcmd)
 		myMatrix = new Matrix(newMatrix);
 		break;
 	case 7:
-		myMatrix.symmetryCheck();
+		if (myMatrix.symmetryCheck())
+		{
+			System.out.println("Your array is symmetrical.");
+		}
+		else
+		{
+			System.out.println("Your array is not symmetrical.");
+		}
 		break;
 	case 8:
-		myMatrix.triangularCheck();
+		if (myMatrix.triangularCheck())
+		{
+			System.out.println("Your array is triangular.");
+		}
+		else
+		{
+			System.out.println("Your array is not triangular.");
+		}
+
 		break;
 	default:
 		System.out.println("Bye!");
