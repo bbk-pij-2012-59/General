@@ -27,7 +27,7 @@ public class TestTreeIntSortedList
 		System.out.print("Enter a number to check whether it in the set; ");
 		str = System.console().readLine();
 		int searchnumber = Integer.parseInt(str);
-		if (testTree.containsVerbose(searchnumber))
+		if (testTree.contains(searchnumber))
 		{
 			System.out.println("Yes, " + searchnumber + " is in the set.");
 		}

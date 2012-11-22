@@ -1,7 +1,7 @@
 //Ex8x3x2 Implementation as tree
 //22nd November 2012 - Created
 
-public class TreeIntSortedList implements IntSet
+public class TreeIntSortedList implements IntSortedList
 {
 
 	private int value;
@@ -17,13 +17,8 @@ public class TreeIntSortedList implements IntSet
 
 	public void add(int newValue)
 	{
-		//adds a new int to the set; if it is there already, nothing happens
-		if (contains(newValue))
-		{
-			System.out.println("Set already contains this value");
-			return;
-		}
-		else if (newValue > this.value)
+		//adds a new int to the list so that the list remains sorted; a list can contain duplicates unlike a set
+		if (newValue > this.value)
 		{
 			if (right == null)
 			{
@@ -49,7 +44,7 @@ public class TreeIntSortedList implements IntSet
 
 	public boolean contains(int searchValue)
 	{
-		//returns true if the number is in the set, false otherwise
+		//returns true if the number is in the list, false otherwise
 
 		if (searchValue == this.value)
 		{
@@ -79,31 +74,24 @@ public class TreeIntSortedList implements IntSet
 		}
 	}
 
-	public boolean containsVerbose(int searchValue)
-	{
-		//returns the same values as the former method, but for every element that is checked prints its value on screen
-		System.out.println("Value searched for: " + searchValue);
-		boolean answer = contains(searchValue);
-		return answer;
-	}
-
 	public String toString()
 	{
-		//returns a string with the values of the elements in the set separated by commas
+		//returns a string with the values of the elements in the list separated by commas
+		//Should the string be sorted?
 
-		String setAsString = "" + this.value;
+		String listAsString = "" + this.value;
 
 		if (left != null)
 		{
-			setAsString = setAsString + ", " + left.toString();
+			listAsString = listAsString + ", " + left.toString();
 		}
 
 		if (right != null)
 		{
-			setAsString = setAsString + ", " + right.toString();
+			listAsString = listAsString + ", " + right.toString();
 		}
 
-		return setAsString;
+		return listAsString;
 	}
 
 }
