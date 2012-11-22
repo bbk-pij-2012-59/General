@@ -1,5 +1,6 @@
 //Ex7x5x2
-//Created 15th November 2012
+//15th November 2012 - Created
+//22nd November 2012 - NullPointerExceptions sorted
 public class MapRW implements SimpleMap
 {
 
@@ -9,30 +10,28 @@ public class MapRW implements SimpleMap
 	//Puts a new String in the map.
 	//If the key is already in the map, nothing is done.
 	{
-		//if (maparray[key].equals("null"))
-		//NullPointerException here
-		//{
+		if (maparray[key] == null)
+		{
 			maparray[key] = name;
 			return "Done";
-		//}
-		//else
-		//{
-		//	return "Not done";
-		//}
-	}
+		}
+		else
+		{
+			return "Not done";
+		}
+}
 
 	public String get(int key)
 	//Returns the name associated with that key, or null if there is none.
 	{
-		//if (maparray[key].equals("null"))
-		//NullPointerException here
-		//{
-			//return "null";
-		//}
-		//else
-		//{
+		if (maparray[key] == null)
+		{
+			return "null";
+		}
+		else
+		{
 			return maparray[key];
-		//}
+		}
 	}
 
 	public void remove(int key)
@@ -42,7 +41,7 @@ public class MapRW implements SimpleMap
 	* name is added with the same key.
 	*/
 	{
-		if (!maparray[key].equals(null))
+		if (maparray[key] != null)
 		{
 			maparray[key] = null;
 			return;
@@ -54,7 +53,7 @@ public class MapRW implements SimpleMap
 	{
 		for (int i = 0; i < 1000; i++)
 		{
-			if (!maparray[i].equals(null))
+			if (maparray[i] != null)
 					{
 						return false;
 					}
