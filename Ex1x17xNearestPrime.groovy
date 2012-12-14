@@ -24,7 +24,7 @@ if (!originalnumber)
 {
 	// Secondly, find the next higher integer that is a prime number
 	higher = num + 1
-	while (higher < 1000000)
+	while (higher < 2*num)
 	{
  		counter2=2
  		while (counter2<=higher/2)
@@ -78,7 +78,7 @@ else if (highernumber || lowernumber)
  	{
   		println "The nearest prime number to the number that you provided (" + num + ") is " + higher
  	}
- 	else if ((higher - num) = (num - lower))
+ 	else if ((higher - num) == (num - lower))
  	{
   		println "The nearest prime numbers to the number that you provided (" + num + ") are " + lower + " and " + higher
  	}

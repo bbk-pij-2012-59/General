@@ -1,34 +1,22 @@
-//Ex3x13
+//Ex3x13 - not working - NULLPointerException: cannot set property 'x' on null object at line 22
 
-double xside = 0, yside = 0, perimeter = 0, area = 0
+double xside = 0, yside = 0, perimeter = 0, area = 0, xx=0
 String str = ""
+
 class Point
 {
-double x;
-double y;
+	double x;
+	double y;
 }
-Point upLeft = new Point()
-Point downRight = new Point()
+
 class Rectangle
 {
-Point upLeft;
-Point downRight;
+	Point upLeft;
+	Point downRight;
 }
+
 Rectangle quadA = new Rectangle()
-println upLeft.x
-println upLeft.y
-println downRight.x
-println downRight.y
-println quadA.upLeft
-println quadA.downRight
-quadA.upLeft.x = 0
-quadA.upLeft.y = 0
-quadA.downRight.x = 0
-quadA.downRight.y = 0
-println quadA.upLeft.x
-println quadA.upLeft.y
-println quadA.downRight.x
-println quadA.downRight.y
+
 print "Please input the X coordinate of the upper left corner of your rectangle: "
 str = System.console().readLine()
 quadA.upLeft.x = Double.parseDouble(str)

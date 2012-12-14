@@ -27,9 +27,9 @@ public class PointerQueue implements PersonQueue
 	  	}
 	  	else
 	  	{
-	  	Person served = headOfQueue;
-	  	headOfQueue = headOfQueue.getNextInQueue();
-	  	return served;
+	  	 	Person served = headOfQueue;
+	  		headOfQueue = headOfQueue.getNextInQueue();
+	  		return served;
 		}
     }
 

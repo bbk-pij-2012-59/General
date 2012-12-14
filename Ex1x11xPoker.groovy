@@ -1049,9 +1049,7 @@ else if (cardsconsecutive)
 		println "Your hand is a Straight"//the cards do not share the same suit, but all their ranks are consecutive
 	}
 }
-if (samesuit && cardsconsecutive) 
-{
-}else if (threerank)
+else if (threerank)
 {
 	println "Your hand contains Three of a Kind" //three of the cards have the same rank
 }
