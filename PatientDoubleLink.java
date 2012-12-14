@@ -1,4 +1,4 @@
-//Ex6x4: File 1 of 2
+//Ex6x4: File 1 of 2;
 
 public class PatientDoubleLink
 {

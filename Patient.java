@@ -63,4 +63,9 @@ public class Patient
 		}
 	}
 
+    public Patient getNext()
+    {
+	  return nextPatient;
+    }
+
 }

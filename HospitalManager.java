@@ -1,4 +1,4 @@
-//Ex6x3: File 2 of 2; almost there, but how do I delete the first element?
+//Ex6x3: File 2 of 2; working, I think
 
 public class HospitalManager
 {
@@ -35,9 +35,11 @@ public class HospitalManager
 		Patient Patient2012Nov0008 = new Patient("Hart", 89, "Broken hip");
 		patientListStart.addPatient(Patient2012Nov0008);
 
+		System.out.println("");
 		System.out.println("Current list of patients");
 		patientListStart.printList(firstPatient);
 
+		System.out.println("");
 		System.out.println("Please wait while discharged patients are removed from system");
 		if (patientListStart.deletePatient(Patient2012Nov0002))
 		{
@@ -66,25 +68,17 @@ public class HospitalManager
 			System.out.println("Unable to find and delete Patient 2012Nov0002 from system.");
 		}
 
+		System.out.println("");
 		System.out.println("Updated list of patients");
 		patientListStart.printList(firstPatient);
 
-		if (patientListStart.deletePatient(firstPatient))
-		{
-			System.out.println("Patient firstPatient discharged today.");
-		}
-		else
-		{
-			System.out.println("Unable to find and delete firstPatient from system.");
-		}
+		patientListStart = patientListStart.getNext();
+		System.out.println("");
+		System.out.println("Patient firstPatient discharged today.");
 
+		System.out.println("");
 		System.out.println("Updated list of patients");
 		patientListStart.printList(firstPatient);
-
-		//patientListStart = firstPatient.nextPatient;
-
-		//System.out.println("Updated list of patients");
-		//patientListStart.printList(firstPatient);
 
 	}
 
