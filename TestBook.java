@@ -1,5 +1,8 @@
 //Ex10x2
-//3rd December 2012 - Created
+/**3rd December 2012 - Created
+* 15th December 2012 - Amended
+* 20th December 2012 - Extended to include borrower
+*/
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -23,4 +26,23 @@ public class TestBook
 		String expected = "Testing in Java Made Easy";
 		assertEquals(output, expected);
 	}
+
+	@Test
+	public void testsGetBorrower()
+	{
+
+	}
+
+	@Test
+	public void testsIsTaken()
+	{
+
+	}
+
+	@Test
+	public void testsSetTaken()
+	{
+
+	}
+
 }

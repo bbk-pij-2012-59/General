@@ -2,6 +2,7 @@
 //3rd December 2012 - Created
 //4th December 2012 - Extended
 //10th December 2012 -
+//20th December 2012 - Book class made into LibraryBook class
 
 public interface Library
 {
@@ -12,11 +13,13 @@ public interface Library
 
 	int getMaxBooksPerUser();
 
+	void setMaxBooksPolicy(int maxno);
+
 	void addBook(String title, String author);
 
-	Book takeBook(String title);
+	LibraryBook takeBook(String title, LibraryUser borrower);
 
-	void returnBook(Book book);
+	void returnBook(LibraryBook book);
 
 	int getReaderCount();
 
@@ -24,9 +27,9 @@ public interface Library
 
 	int getBookBorrowedCount();
 
-	//User[] getCurrentBorrower();
+	LibraryUser[] getCurrentBorrower();
 
-	User[] getAllUser();
+	LibraryUser[] getAllUser();
 
 
 }

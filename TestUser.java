@@ -1,5 +1,8 @@
-//Ex10x2
-//3rd December 2012 - Created
+/**Ex10x2
+* 3rd December 2012 - Created
+* 15th December 2012 - Extended
+* 20th December 2012 - Extended to include borrowing books
+*/
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -56,5 +59,29 @@ public class TestUser
 		assertEquals(output, expected);
 	}
 
+	@Test
+	public void testsBorrowBook()
+	{
+
+	}
+
+	@Test
+	public void testsReturnBook()
+	{
+
+	}
+
+	@Test
+	public void testsGetBooksBorrowed()
+	{
+
+	}
+
+	@Test
+	public void testsGetNoBooksOut()
+	{
+
+	}
 
 }
+

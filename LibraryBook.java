@@ -3,6 +3,8 @@
 * Implementation of Book class in library application
 * 3rd December 2012 - Created
 * 5th December 2012 - Extended to include loan status
+* 15th December 2012 - Amended
+* 20th December 2012 - Extended to include borrower
 */
 
 public class LibraryBook implements Book
@@ -11,65 +13,72 @@ public class LibraryBook implements Book
 	private String bookAuthor;
 	private String bookTitle;
 	private boolean bookTaken;
-	private LibraryUser bookBorrower;
+	private LibraryUser borrower;
 
-	LibraryBook(String author, String title)
 	/**
 	*constructor - creates a new book
 	* @param bookAuthor the author of the new book
 	* @param bookTitle the title of the new book
 	* @param bookTaken the loan status of the new book
-	* @param bookBorrower the user that has borrowed the book
 	*/
+	LibraryBook(String author, String title)
 	{
 		this.bookAuthor = author;
 		this.bookTitle = title;
 		this.bookTaken = false;
-		this.bookBorrower = null;
+		this.borrower = null;
 	}
 
-
-	public String getAuthor()
 	/**
 	*@return the author of the book
 	*/
+	public String getAuthor()
 	{
 		return this.bookAuthor;
 	}
 
-	public String getTitle()
 	/**
 	*@return the title of the book
 	*/
+	public String getTitle()
 	{
 		return this.bookTitle;
 	}
 
-	public boolean isTaken()
 	/**
 	*@return the loan status of the book
 	*/
+	public boolean isTaken()
 	{
 		return this.bookTaken;
 	}
 
-	//public void setTaken(boolean loanStatus, LibraryUser user)
-	public void setTaken(boolean loanStatus)
+	/**
+	*@return the borrower of the book
+	*/
+	public LibraryUser getBorrower()
+	{
+		return this.borrower;
+	}
+
 	/**
 	*changes the loan status of the book
 	*/
+	public void setTaken(boolean loanStatus, LibraryUser borrowedBy)
 	{
 		if (this.bookTaken && !loanStatus)
 		{
 			this.bookTaken = false;
-			//this.bookBorrower = null;
+			this.borrower = null;
 		}
 		else if (!this.bookTaken && loanStatus)
 
 		{
 			this.bookTaken = true;
-			//this.bookBorrower = user;
+			this.borrower = borrowedBy;
 		}
 	}
 
 }
+
+
